@@ -11,6 +11,7 @@ import Foundation
 enum HypeError: LocalizedError {
     case ckError(Error)
     case couldNotUnwrap
+    case unexpectedRecordFound
     
     var errorDescription: String {
         switch self {
@@ -18,6 +19,8 @@ enum HypeError: LocalizedError {
             return error.localizedDescription
         case .couldNotUnwrap:
             return "Unable to get this Hype, That's not very Hype..."
+        case .unexpectedRecordFound:
+            return "Unexpected record found when none should have been returned"
         }
     }
     

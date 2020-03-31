@@ -90,4 +90,48 @@ class HypeController {
         
         publicDB.add(operation)
     }
-}
+    
+    func delete(_ hype: Hype, completion: @escaping (Result<Bool, HypeError>) -> Void) {
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [hype.recordID])
+        
+        operation.savePolicy = .changedKeys
+        operation.qualityOfService = .userInteractive
+        operation.modifyRecordsCompletionBlock = { (records, _, error) in
+            if let error = error {
+                print(error.localizedDescription + " --> \(error)")
+                completion(.failure(.ckError(error)))
+                return
+            }
+            
+            if records?.count == 0{
+                completion(.success(true))
+            } else {
+                completion(.failure(.unexpectedRecordFound))
+            }
+        } // end modifyRecordsCompletionBlock
+        
+        publicDB.add(operation)
+    } // end delete
+    
+    func subscribeForRemoteNotifications(completion: @escaping (Error?) -> Void) {
+        
+        let predicate = NSPredicate(value: true)
+        let subscription = CKQuerySubscription(recordType: HypeStrings.recordTypeKey, predicate: predicate, options: .firesOnRecordCreation)
+        
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.title = "Hype was added"
+        notificationInfo.alertBody = "Come check it out"
+        notificationInfo.shouldBadge = true
+        
+        subscription.notificationInfo = notificationInfo
+        
+        publicDB.save(subscription) { (_, error) in
+            if let error = error {
+                print(error.localizedDescription + " --> \(error)")
+                completion(error)
+            }
+            completion(nil)
+        }
+        
+    } // end subscribeForRemoteNotifications
+} // end HypeController
