@@ -22,10 +22,9 @@ class User {
     var appleUserRef: CKRecord.Reference
     
     /**
-        Initializes a User object
+        Initializes a User object.
      
-    # Parameters:
-     
+    - Parameters:
         - username: String value fore the User's username property
         - bio: String value for the User's bio property, set by default to an empty string
         - recordID: ckRecordID value for teh User's recordID property, set by default to a uuidString
@@ -42,6 +41,15 @@ class User {
 }
 
 extension User {
+    
+    /**
+     Failable Convenience Initializer to init Users from CKRecords.
+     
+     - Parameters:
+        - ckRecord: CKRecord containing Key/Value pairs to init a User Object
+     */
+    
+    
     convenience init?(ckRecord: CKRecord) {
         guard let username = ckRecord[UserConstants.usernameKey] as? String,
             let bio = ckRecord[UserConstants.bioKey] as? String,
@@ -53,6 +61,15 @@ extension User {
 }
 
 extension CKRecord {
+    
+    /**
+     Convenience init to create a CKRecord from a Hype Object
+     
+     - Parameters:
+        - user: The User object to set Key/Value pairs for inside the CKRecord object
+     */
+    
+    
     convenience init(user: User) {
         
         self.init(recordType: UserConstants.recordType, recordID: user.recordID)
