@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */; };
 		AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18BEA024327031009D0E6A /* DateExtension.swift */; };
+		AC31B89E2435184300AFF50A /* HypeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC31B89C2435184300AFF50A /* HypeList.storyboard */; };
+		AC31B8A02435194700AFF50A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31B89F2435194700AFF50A /* SignUpViewController.swift */; };
 		AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC570BC52433AD0E00F8120A /* HypeError.swift */; };
 		AC570BE62434F4CC00F8120A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC570BE52434F4CC00F8120A /* User.swift */; };
 		AC87C8032434FE0F005EE8B7 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87C8022434FE0F005EE8B7 /* UserController.swift */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypesViewController.swift; sourceTree = "<group>"; };
 		AC18BEA024327031009D0E6A /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		AC31B89D2435184300AFF50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Hype/Storyboard/Base.lproj/HypeList.storyboard; sourceTree = "<group>"; };
+		AC31B89F2435194700AFF50A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC570BC52433AD0E00F8120A /* HypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeError.swift; sourceTree = "<group>"; };
 		AC570BE52434F4CC00F8120A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AC87C8022434FE0F005EE8B7 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */,
+				AC31B89F2435194700AFF50A /* SignUpViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				AC8B42B9243254A30075B154 /* Main.storyboard */,
+				AC31B89C2435184300AFF50A /* HypeList.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -224,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC31B89E2435184300AFF50A /* HypeList.storyboard in Resources */,
 				AC8B42C0243254A50075B154 /* LaunchScreen.storyboard in Resources */,
 				AC8B42BD243254A50075B154 /* Assets.xcassets in Resources */,
 				AC8B42BB243254A30075B154 /* Main.storyboard in Resources */,
@@ -237,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC31B8A02435194700AFF50A /* SignUpViewController.swift in Sources */,
 				AC87C8032434FE0F005EE8B7 /* UserController.swift in Sources */,
 				AC8B42B4243254A30075B154 /* AppDelegate.swift in Sources */,
 				AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */,
@@ -253,6 +261,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		AC31B89C2435184300AFF50A /* HypeList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC31B89D2435184300AFF50A /* Base */,
+			);
+			name = HypeList.storyboard;
+			sourceTree = "<group>";
+		};
 		AC8B42B9243254A30075B154 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -11,13 +11,16 @@ import Foundation
 enum UserError: LocalizedError {
     case ckError(Error)
     case noUserLoggedIn
+    case couldNotUnwrap
     
-    var errorDescription: String? {
+    var errorDescription: String {
         switch self {
         case .ckError(let error):
-            return error.localizedDescription
+            return "CloudKit returned an error: \(error.localizedDescription)"
         case .noUserLoggedIn:
             return "No user logged in."
+        case .couldNotUnwrap:
+            return "Unable to unwrap the value."
         }
             
     } // end errorDescription

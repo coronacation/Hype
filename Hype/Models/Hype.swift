@@ -15,6 +15,7 @@ struct HypeStrings {
     static let recordTypeKey = "Hype"
     static let bodyKey = "body"
     static let timestampKey = "timestamp"
+    fileprivate static let userReferenceKey = "userReference"
 }
 
 // MARK: - Model
@@ -23,11 +24,13 @@ class Hype {
     var body: String
     var timestamp: Date
     var recordID: CKRecord.ID
+    var userReference: CKRecord.Reference?
     
-    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userReference: CKRecord.Reference?) {
         self.body = body
         self.timestamp = timestamp
         self.recordID = recordID
+        self.userReference = userReference
     }
 }
 
@@ -42,8 +45,10 @@ extension Hype {
             let timestamp = ckRecord[HypeStrings.timestampKey] as? Date
             else { return nil }
         
+        let userReference = ckRecord[HypeStrings.userReferenceKey] as? CKRecord.Reference
+        
         // init
-        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID)
+        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID, userReference: userReference)
     }
 }
 

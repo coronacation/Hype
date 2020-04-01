@@ -10,9 +10,9 @@ import CloudKit
 
 struct UserConstants {
     static let recordType = "User"
-    fileprivate static let usernameKey = "username"
+    fileprivate static let usernameKey = "username" // fileprivate means you cannot autocomplete outside of this file?
     fileprivate static let bioKey = "bio"
-    fileprivate static let appleUserRefKey = "appleUserRef"
+    static let appleUserRefKey = "appleUserRef"
 }
 
 class User {

@@ -19,25 +19,27 @@ class HypeController {
     
     // MARK: - CRUD
     
-    func saveHype(body: String, completion: @escaping (Bool) -> Void) {
+    func saveHype(body: String, completion: @escaping (Result<Hype?, HypeError>) -> Void) {
+        guard let currentUser = UserController.shared.currentUser else { return completion(.failure(.noUserLoggedIn)) }
         
-        let hype = Hype(body: body)
+        let reference = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
+        
+        let hype = Hype(body: body, userReference: reference)
         
         let record = CKRecord(hype: hype)
         
         publicDB.save(record) { (record, error) in
             if let error = error {
-                print(error, error.localizedDescription)
-                return completion(false)
+                return completion(.failure(.ckError(error)))
             }
             
             guard let record = record,
                 let hype = Hype(ckRecord: record) else
-            { return completion(false) }
+            { return completion(.failure(.couldNotUnwrap)) }
             
             //            self.hypes.append(hype) // Alternative
             self.hypes.insert(hype, at: 0)
-            return completion(true)
+            return completion(.success(hype))
         }
     } // end saveHype
     

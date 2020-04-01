@@ -93,11 +93,14 @@ class HypesViewController: UIViewController {
                     
                 }
             } else {
-                HypeController.shared.saveHype(body: body) { (success) in
-                    DispatchQueue.main.async {
-                        if success {
-                            self.updateViews()
+                HypeController.shared.saveHype(body: body) { (result) in
+                    switch result{
+                    case .success(_):
+                        DispatchQueue.main.async {
+                                self.updateViews()
                         }
+                    case .failure(let error):
+                        print(error.localizedDescription)
                     }
                 }
             }

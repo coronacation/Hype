@@ -15,7 +15,18 @@ class UserController {
     var currentUser: User?
     let publicDB = CKContainer.default().publicCloudDatabase
     
-    func createUserWith(_ username: String, completion: @escaping (Result<User?, UserError>) -> Void) {
+    
+    /**
+       Creates a User and saves it to CloudKit
+    
+    - Parameters:
+     - username: Stringvalue to pass into the User init
+     - completion: Excaping completion black for the method
+     - result: Result found in the completion block with success returning a User and failure returning a UserError
+    
+    */
+    
+    func createUserWith(_ username: String, completion: @escaping (Result<User, UserError>) -> Void) {
         fetchAppleUserReference { (result) in
             switch result {
             case .success(let reference):
@@ -24,9 +35,31 @@ class UserController {
                 let newUser = User(username: username, appleUserRef: reference)
                 
                 let record = CKRecord(user: newUser)
+                
+                self.publicDB.save(record) { (record, error) in
+                    if let error = error {
+                        completion(.failure(.ckError(error)))
+                    }
+                    
+                    guard let record = record,
+                        let savedUser = User(ckRecord: record) else { return completion(.failure(.couldNotUnwrap)) }
+                    
+                    completion(.success(savedUser))
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
+    
+    /**
+     Fetches the recordID of the currently logged in AppleID User
+     
+     - Parameters:
+        - completion: Escaping completion block for the method
+        - reference: Optional reference for the found AppleID User
+    
+    */
     
     func fetchAppleUserReference(completion: @escaping (Result<CKRecord.Reference?, UserError>) -> Void) {
         
@@ -42,4 +75,42 @@ class UserController {
             }
         }
     }
-}
+    
+    /**
+     Fetches the User object that points to the currently logged in AppleID User from the publicDatabase
+     
+     - Parameters:
+        - completion: Escaping completion block for the method
+        - result: Result found in the completion block with success returning a User and failure returning UserError
+     */
+    
+    func fetchUser(completion: @escaping(Result<User?,UserError>) -> Void) {
+        fetchAppleUserReference { (result) in
+            switch result {
+            case .success(let reference):
+                guard let reference = reference else { return completion(.failure(.noUserLoggedIn)) }
+                
+                // %K is a key, %@ is the object we are passing it
+                
+                let appleUserPredicate = NSPredicate(format: "%K == %@", [UserConstants.appleUserRefKey], reference)
+                
+                let query = CKQuery(recordType: UserConstants.recordType, predicate: appleUserPredicate)
+                
+                self.publicDB.perform(query, inZoneWith: nil) { (records, error) in
+                    if let error = error {
+                        completion(.failure(.ckError(error)))
+                    }
+                    
+                    guard let record = records?.first,
+                    let foundUser = User(ckRecord: record)
+                        else { return completion(.failure(.couldNotUnwrap)) }
+                    
+                    completion(.success(foundUser))
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+} // end class
