@@ -2,8 +2,8 @@
 //  HypeError.swift
 //  Hype
 //
-//  Created by theevo on 3/31/20.
-//  Copyright © 2020 Theo Vora. All rights reserved.
+//  Created by Theo Vora on 3/31/20.
+//  Copyright © 2020 Studio Awaken. All rights reserved.
 //
 
 import Foundation

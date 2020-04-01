@@ -2,8 +2,8 @@
 //  Hype.swift
 //  Hype
 //
-//  Created by theevo on 3/30/20.
-//  Copyright © 2020 Theo Vora. All rights reserved.
+//  Created by Theo Vora on 3/30/20.
+//  Copyright © 2020 Studio Awaken. All rights reserved.
 //
 
 import CloudKit // contains Foundation. right-click and Jump to Definition for proof.
