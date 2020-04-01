@@ -10,6 +10,7 @@
 		AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */; };
 		AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18BEA024327031009D0E6A /* DateExtension.swift */; };
 		AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC570BC52433AD0E00F8120A /* HypeError.swift */; };
+		AC570BE62434F4CC00F8120A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC570BE52434F4CC00F8120A /* User.swift */; };
 		AC8B42B4243254A30075B154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B42B3243254A30075B154 /* AppDelegate.swift */; };
 		AC8B42B6243254A30075B154 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B42B5243254A30075B154 /* SceneDelegate.swift */; };
 		AC8B42BB243254A30075B154 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8B42B9243254A30075B154 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypesViewController.swift; sourceTree = "<group>"; };
 		AC18BEA024327031009D0E6A /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		AC570BC52433AD0E00F8120A /* HypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeError.swift; sourceTree = "<group>"; };
+		AC570BE52434F4CC00F8120A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AC8B42B0243254A30075B154 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8B42B3243254A30075B154 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8B42B5243254A30075B154 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				AC8B42CF24325ECA0075B154 /* Controllers */,
-				AC8B42CC243257CA0075B154 /* Model */,
+				AC8B42CC243257CA0075B154 /* Models */,
 				AC8B42D224326B000075B154 /* Storyboard */,
 				AC18BEA224327090009D0E6A /* Helpers */,
 				AC8B42CB243256B70075B154 /* Resources */,
@@ -131,12 +133,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		AC8B42CC243257CA0075B154 /* Model */ = {
+		AC8B42CC243257CA0075B154 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				AC8B42CD243257D20075B154 /* Hype.swift */,
+				AC570BE52434F4CC00F8120A /* User.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		AC8B42CF24325ECA0075B154 /* Controllers */ = {
@@ -232,6 +235,7 @@
 				AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */,
 				AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */,
 				AC8B42D124325ED80075B154 /* HypeController.swift in Sources */,
+				AC570BE62434F4CC00F8120A /* User.swift in Sources */,
 				AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */,
 				AC8B42B6243254A30075B154 /* SceneDelegate.swift in Sources */,
 				AC8B42CE243257D20075B154 /* Hype.swift in Sources */,
