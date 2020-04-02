@@ -93,7 +93,10 @@ class HypesViewController: UIViewController {
                     
                 }
             } else {
-                HypeController.shared.saveHype(body: body) { (result) in
+                
+                // we already have the photo saved in photo data so we don't need to resave
+                
+                HypeController.shared.saveHype(body: body, photo: nil) { (result) in
                     switch result{
                     case .success(_):
                         DispatchQueue.main.async {
@@ -125,12 +128,10 @@ extension HypesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "hypeCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "hypeCell", for: indexPath) as? HypeTableViewCell else { return UITableViewCell() }
         
         let hype = HypeController.shared.hypes[indexPath.row]
-        
-        cell.textLabel?.text = hype.body
-        cell.detailTextLabel?.text = hype.timestamp.formatDate()
+        cell.hype = hype
         
         return cell
     }

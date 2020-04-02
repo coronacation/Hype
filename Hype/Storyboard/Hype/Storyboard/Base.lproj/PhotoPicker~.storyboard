@@ -15,8 +15,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3G9-Nm-AEX">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3G9-Nm-AEX">
+                                <rect key="frame" x="0.0" y="151" width="414" height="594"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="hypeCell" id="trO-d9-H96" customClass="HypeTableViewCell" customModule="Hype" customModuleProvider="target">
@@ -107,12 +108,6 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="3G9-Nm-AEX" firstAttribute="trailing" secondItem="8VR-E4-ZkM" secondAttribute="trailing" id="7w6-wj-eh0"/>
-                            <constraint firstItem="3G9-Nm-AEX" firstAttribute="top" secondItem="8VR-E4-ZkM" secondAttribute="top" id="Qdi-ie-3yP"/>
-                            <constraint firstItem="3G9-Nm-AEX" firstAttribute="leading" secondItem="8VR-E4-ZkM" secondAttribute="leading" id="dJg-uC-hIr"/>
-                            <constraint firstAttribute="bottom" secondItem="3G9-Nm-AEX" secondAttribute="bottom" id="e5S-Jy-ZMr"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8VR-E4-ZkM"/>
                     </view>
                     <toolbarItems/>
@@ -167,7 +162,7 @@
                                             <constraint firstAttribute="width" secondItem="Di3-JJ-WlS" secondAttribute="height" multiplier="1:1" id="d4b-0Y-FCk"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="1DP-7W-edm" kind="embed" identifier="photoPickerVC" id="z2P-Yp-e33"/>
+                                            <segue destination="uP2-00-qVc" kind="embed" id="z2P-Yp-e33"/>
                                         </connections>
                                     </containerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="MeQ-KG-qqE">
@@ -230,11 +225,44 @@
             </objects>
             <point key="canvasLocation" x="518.84057971014499" y="53.571428571428569"/>
         </scene>
-        <!--PhotoPicker-->
-        <scene sceneID="dHT-p9-7bG">
+        <!--Photo Picker View Controller-->
+        <scene sceneID="oWZ-kl-qhz">
             <objects>
-                <viewControllerPlaceholder storyboardName="PhotoPicker" id="1DP-7W-edm" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="irT-mY-XYB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="uP2-00-qVc" customClass="PhotoPickerViewController" customModule="Hype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cJN-CG-nEm">
+                        <rect key="frame" x="0.0" y="0.0" width="394" height="394"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="52u-Hu-7Zf">
+                                <rect key="frame" x="0.0" y="0.0" width="394" height="394"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGH-T3-CeY">
+                                <rect key="frame" x="0.0" y="0.0" width="394" height="394"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="selectPhotoButtonTapped:" destination="uP2-00-qVc" eventType="touchUpInside" id="cLp-OM-iZ4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="52u-Hu-7Zf" firstAttribute="leading" secondItem="cJN-CG-nEm" secondAttribute="leading" id="0pv-CK-pmK"/>
+                            <constraint firstItem="52u-Hu-7Zf" firstAttribute="top" secondItem="cJN-CG-nEm" secondAttribute="top" id="7Cu-ZX-FtK"/>
+                            <constraint firstItem="vGH-T3-CeY" firstAttribute="top" secondItem="cJN-CG-nEm" secondAttribute="top" id="EUg-tf-UAT"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="vGH-T3-CeY" secondAttribute="bottom" id="QIJ-Xj-2lB"/>
+                            <constraint firstAttribute="trailing" secondItem="52u-Hu-7Zf" secondAttribute="trailing" id="XYs-EO-b6X"/>
+                            <constraint firstAttribute="bottom" secondItem="52u-Hu-7Zf" secondAttribute="bottom" id="eYH-sl-00Q"/>
+                            <constraint firstAttribute="bottom" secondItem="vGH-T3-CeY" secondAttribute="bottom" id="lGZ-KN-h6t"/>
+                            <constraint firstAttribute="trailing" secondItem="vGH-T3-CeY" secondAttribute="trailing" id="vaI-cg-upp"/>
+                            <constraint firstItem="vGH-T3-CeY" firstAttribute="leading" secondItem="cJN-CG-nEm" secondAttribute="leading" id="w5E-wO-dHk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="52u-Hu-7Zf" id="pJW-F2-ydE"/>
+                        <outlet property="selectPhotoButtonTapped" destination="vGH-T3-CeY" id="dcr-4f-CsB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tVr-Mb-5el" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3232" y="54"/>
         </scene>

@@ -12,6 +12,7 @@ enum UserError: LocalizedError {
     case ckError(Error)
     case noUserLoggedIn
     case couldNotUnwrap
+    case noUserForHype
     
     var errorDescription: String {
         switch self {
@@ -21,6 +22,8 @@ enum UserError: LocalizedError {
             return "No user logged in."
         case .couldNotUnwrap:
             return "Unable to unwrap the value."
+        case .noUserForHype:
+            return "No user for hype."
         }
             
     } // end errorDescription

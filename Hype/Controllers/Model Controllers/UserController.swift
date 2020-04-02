@@ -7,6 +7,7 @@
 //
 
 import CloudKit
+import UIKit.UIImage
 
 class UserController {
     
@@ -17,7 +18,7 @@ class UserController {
     
     
     /**
-       Creates a User and saves it to CloudKit
+    Creates a User and saves it to CloudKit
     
     - Parameters:
      - username: Stringvalue to pass into the User init
@@ -26,13 +27,13 @@ class UserController {
     
     */
     
-    func createUserWith(_ username: String, completion: @escaping (Result<User, UserError>) -> Void) {
+    func createUserWith(_ username: String, profilePicture: UIImage?, completion: @escaping (Result<User, UserError>) -> Void) {
         fetchAppleUserReference { (result) in
             switch result {
             case .success(let reference):
                 guard let reference = reference else { return completion(.failure(.noUserLoggedIn))}
                 
-                let newUser = User(username: username, appleUserRef: reference)
+                let newUser = User(username: username, appleUserRef: reference, profilePhoto: profilePicture)
                 
                 let record = CKRecord(user: newUser)
                 
@@ -88,7 +89,8 @@ class UserController {
         fetchAppleUserReference { (result) in
             switch result {
             case .success(let reference):
-                guard let reference = reference else { return completion(.failure(.noUserLoggedIn)) }
+                guard let reference = reference
+                    else { return completion(.failure(.noUserLoggedIn)) }
                 
                 // %K is a key, %@ is the object we are passing it
                 
@@ -113,4 +115,26 @@ class UserController {
             }
         }
     }
+    
+    func fetchUserFor(_ hype: Hype, completion: @escaping (Result<User, UserError>) -> Void) {
+        guard let userID = hype.userReference?.recordID
+            else { completion(.failure(.noUserForHype)); return }
+        
+        let fetchUserPredicate = NSPredicate(format: "%K == %@", argumentArray:["recordID", userID])
+        let query = CKQuery(recordType: UserConstants.recordType, predicate: fetchUserPredicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription + "--> \(error)")
+            }
+            
+            guard let record = records?.first,
+            let foundUser = User(ckRecord: record)
+                else { completion(.failure(.couldNotUnwrap)); return }
+            
+            completion(.success(foundUser))
+        }
+    }
+    
+    
 } // end class

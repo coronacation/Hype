@@ -10,18 +10,32 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var photoContainerView: UIView!
     @IBOutlet weak var usernameTextField: UITextField! // implicit unwrapping
-
+    
+    
+    // MARK: - Properties
+    
+    var image: UIImage?
+    
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUser()
     }
     
+    
+    // MARK: - Actions
+    
     @IBAction func signUpButtonTapped(_ sender: Any) {
         guard let username = usernameTextField.text,
             !username.isEmpty else { return }
         
-        UserController.shared.createUserWith(username) { (result) in
+        UserController.shared.createUserWith(username, profilePicture: image) { (result) in
             switch result {
             case .success(let user):
                 UserController.shared.currentUser = user
@@ -34,6 +48,9 @@ class SignUpViewController: UIViewController {
             }
         }
     }
+    
+    
+    // MARK: - Helper Functions
     
     func fetchUser() {
         UserController.shared.fetchUser { (result) in
@@ -58,5 +75,22 @@ class SignUpViewController: UIViewController {
             self.present(viewController, animated: true)
         }
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "photoPickerVC" {
+            let destinationVC = segue.destination as? PhotoPickerViewController
+            destinationVC?.delegate = self
+            
+        }
+    }
 
+} // end class
+
+
+extension SignUpViewController: PhotoSelectorDelegate {
+    func photoPickerSelected(image: UIImage) {
+        self.image = image
+    }
 }

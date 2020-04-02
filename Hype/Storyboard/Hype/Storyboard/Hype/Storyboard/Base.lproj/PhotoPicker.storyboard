@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uP2-00-qVc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo Picker View Controller-->
+        <scene sceneID="oWZ-kl-qhz">
+            <objects>
+                <viewController id="uP2-00-qVc" customClass="PhotoPickerViewController" customModule="Hype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cJN-CG-nEm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="52u-Hu-7Zf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGH-T3-CeY">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="selectPhotoButtonTapped:" destination="uP2-00-qVc" eventType="touchUpInside" id="cLp-OM-iZ4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="52u-Hu-7Zf" firstAttribute="leading" secondItem="cJN-CG-nEm" secondAttribute="leading" id="0pv-CK-pmK"/>
+                            <constraint firstItem="52u-Hu-7Zf" firstAttribute="top" secondItem="cJN-CG-nEm" secondAttribute="top" id="7Cu-ZX-FtK"/>
+                            <constraint firstItem="vGH-T3-CeY" firstAttribute="top" secondItem="cJN-CG-nEm" secondAttribute="top" id="EUg-tf-UAT"/>
+                            <constraint firstAttribute="trailing" secondItem="52u-Hu-7Zf" secondAttribute="trailing" id="XYs-EO-b6X"/>
+                            <constraint firstAttribute="bottom" secondItem="52u-Hu-7Zf" secondAttribute="bottom" id="eYH-sl-00Q"/>
+                            <constraint firstAttribute="bottom" secondItem="vGH-T3-CeY" secondAttribute="bottom" id="lGZ-KN-h6t"/>
+                            <constraint firstAttribute="trailing" secondItem="vGH-T3-CeY" secondAttribute="trailing" id="vaI-cg-upp"/>
+                            <constraint firstItem="vGH-T3-CeY" firstAttribute="leading" secondItem="cJN-CG-nEm" secondAttribute="leading" id="w5E-wO-dHk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Tu-Wz-GLK"/>
+                    </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="52u-Hu-7Zf" id="pJW-F2-ydE"/>
+                        <outlet property="selectPhotoButtonTapped" destination="vGH-T3-CeY" id="dcr-4f-CsB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tVr-Mb-5el" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3232" y="54"/>
+        </scene>
+    </scenes>
+</document>

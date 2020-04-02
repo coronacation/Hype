@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC15AD8524365E0F00FBF06F /* HypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15AD8424365E0F00FBF06F /* HypeTableViewCell.swift */; };
+		AC15AD872436808500FBF06F /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15AD862436808500FBF06F /* CreatePostViewController.swift */; };
+		AC15AD89243682AD00FBF06F /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15AD88243682AD00FBF06F /* PhotoPickerViewController.swift */; };
+		AC15AD8C2436902300FBF06F /* PhotoPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC15AD8A2436902300FBF06F /* PhotoPicker.storyboard */; };
 		AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */; };
 		AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18BEA024327031009D0E6A /* DateExtension.swift */; };
 		AC31B89E2435184300AFF50A /* HypeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC31B89C2435184300AFF50A /* HypeList.storyboard */; };
@@ -26,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC15AD8424365E0F00FBF06F /* HypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeTableViewCell.swift; sourceTree = "<group>"; };
+		AC15AD862436808500FBF06F /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		AC15AD88243682AD00FBF06F /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
+		AC15AD8B2436902300FBF06F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Hype/Storyboard/Hype/Storyboard/Base.lproj/PhotoPicker.storyboard; sourceTree = "<group>"; };
 		AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypesViewController.swift; sourceTree = "<group>"; };
 		AC18BEA024327031009D0E6A /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		AC31B89D2435184300AFF50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Hype/Storyboard/Base.lproj/HypeList.storyboard; sourceTree = "<group>"; };
@@ -59,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC15AD8324365A0C00FBF06F /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC15AD8424365E0F00FBF06F /* HypeTableViewCell.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		AC18BE9C24326CB1009D0E6A /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,8 +87,11 @@
 		AC18BE9D24326CBD009D0E6A /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AC15AD8324365A0C00FBF06F /* Custom Views */,
 				AC18BE9E24326CCE009D0E6A /* HypesViewController.swift */,
 				AC31B89F2435194700AFF50A /* SignUpViewController.swift */,
+				AC15AD862436808500FBF06F /* CreatePostViewController.swift */,
+				AC15AD88243682AD00FBF06F /* PhotoPickerViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -168,6 +187,7 @@
 			children = (
 				AC8B42B9243254A30075B154 /* Main.storyboard */,
 				AC31B89C2435184300AFF50A /* HypeList.storyboard */,
+				AC15AD8A2436902300FBF06F /* PhotoPicker.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -231,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC31B89E2435184300AFF50A /* HypeList.storyboard in Resources */,
+				AC15AD8C2436902300FBF06F /* PhotoPicker.storyboard in Resources */,
 				AC8B42C0243254A50075B154 /* LaunchScreen.storyboard in Resources */,
 				AC8B42BD243254A50075B154 /* Assets.xcassets in Resources */,
 				AC8B42BB243254A30075B154 /* Main.storyboard in Resources */,
@@ -245,22 +266,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC31B8A02435194700AFF50A /* SignUpViewController.swift in Sources */,
+				AC15AD872436808500FBF06F /* CreatePostViewController.swift in Sources */,
 				AC87C8032434FE0F005EE8B7 /* UserController.swift in Sources */,
 				AC8B42B4243254A30075B154 /* AppDelegate.swift in Sources */,
 				AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */,
 				AC87C8052434FE3E005EE8B7 /* UserError.swift in Sources */,
 				AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */,
+				AC15AD89243682AD00FBF06F /* PhotoPickerViewController.swift in Sources */,
 				AC8B42D124325ED80075B154 /* HypeController.swift in Sources */,
 				AC570BE62434F4CC00F8120A /* User.swift in Sources */,
 				AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */,
 				AC8B42B6243254A30075B154 /* SceneDelegate.swift in Sources */,
 				AC8B42CE243257D20075B154 /* Hype.swift in Sources */,
+				AC15AD8524365E0F00FBF06F /* HypeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		AC15AD8A2436902300FBF06F /* PhotoPicker.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC15AD8B2436902300FBF06F /* Base */,
+			);
+			name = PhotoPicker.storyboard;
+			sourceTree = "<group>";
+		};
 		AC31B89C2435184300AFF50A /* HypeList.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

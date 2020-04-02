@@ -7,12 +7,14 @@
 //
 
 import CloudKit
+import UIKit.UIImage
 
 struct UserConstants {
     static let recordType = "User"
     fileprivate static let usernameKey = "username" // fileprivate means you cannot autocomplete outside of this file?
     fileprivate static let bioKey = "bio"
     static let appleUserRefKey = "appleUserRef"
+    fileprivate static let photoAssetKey = "photoAsset"
 }
 
 class User {
@@ -21,22 +23,50 @@ class User {
     var recordID: CKRecord.ID
     var appleUserRef: CKRecord.Reference
     
+    var photoData: Data?
+    
+    var profilePhoto: UIImage? {
+        get {
+            guard let photoData = photoData else { return nil }
+            return UIImage(data: photoData)
+        }
+        set {
+            photoData = newValue?.jpegData(compressionQuality: 0.5)
+        }
+    }
+    
+    var photoAsset: CKAsset? {
+        get {
+            let tempDirectory = NSTemporaryDirectory()
+            let tempDirectoryURL = URL(fileURLWithPath: tempDirectory)
+            let fileURL = tempDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension(".jpg")
+            do {
+                try photoData?.write(to: fileURL)
+            } catch {
+                print(error)
+            }
+            return CKAsset(fileURL: fileURL)
+        }
+    }
+    
     /**
-        Initializes a User object.
+    Initializes a User object.
      
     - Parameters:
         - username: String value fore the User's username property
         - bio: String value for the User's bio property, set by default to an empty string
         - recordID: ckRecordID value for teh User's recordID property, set by default to a uuidString
         - appleUserRef: CKRecord.Reference value for the Users's appleUserRef property
+        - profilePhoto: UIImage of the user's profile
      */
     
-    init(username: String, bio: String = "", recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
+    init(username: String, bio: String = "", recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference, profilePhoto: UIImage? = nil) {
         
         self.username = username
         self.bio = bio
         self.recordID = recordID
         self.appleUserRef = appleUserRef
+        self.profilePhoto = profilePhoto
     }
 }
 
@@ -56,7 +86,17 @@ extension User {
             let appleUserRef = ckRecord[UserConstants.appleUserRefKey] as? CKRecord.Reference
         else { return nil }
         
-        self.init(username: username, bio: bio, recordID: ckRecord.recordID, appleUserRef: appleUserRef)
+        var foundPhoto: UIImage?
+        if let photoAsset = ckRecord[UserConstants.photoAssetKey] as? CKAsset {
+            do {
+                let data = try Data(contentsOf: photoAsset.fileURL!)
+                foundPhoto = UIImage(data: data)
+            } catch {
+                print(error)
+            }
+        }
+        
+        self.init(username: username, bio: bio, recordID: ckRecord.recordID, appleUserRef: appleUserRef, profilePhoto: foundPhoto)
     }
 }
 
@@ -79,6 +119,17 @@ extension CKRecord {
             UserConstants.bioKey: user.bio,
             UserConstants.appleUserRefKey : user.appleUserRef
         ])
+        
+        // CKAsset photo is optional. Must unwrap. Cannot simply assign.
+        
+        if let photoAsset = user.photoAsset {
+            self.setValue(photoAsset, forKey: UserConstants.photoAssetKey)
+        }
     }
 }
 
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.recordID == rhs.recordID
+    }
+}

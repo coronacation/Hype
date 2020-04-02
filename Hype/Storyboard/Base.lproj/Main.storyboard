@@ -38,24 +38,45 @@
                                     <action selector="signUpButtonTapped:" destination="kZF-D1-BeH" eventType="touchUpInside" id="j8C-ec-DF7"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEO-56-l5w">
+                                <rect key="frame" x="41" y="234" width="166" height="165"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sEO-56-l5w" secondAttribute="height" multiplier="1:1" id="cT1-ML-NoA"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Jey-qy-KpD" kind="embed" identifier="photoPickerVC" id="bKH-xB-OlA"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="EvP-OZ-vhr" firstAttribute="width" secondItem="wfL-x8-tHb" secondAttribute="width" multiplier="0.8" id="3BP-fG-gDi"/>
+                            <constraint firstItem="sEO-56-l5w" firstAttribute="width" secondItem="5qO-a5-mqy" secondAttribute="width" multiplier="0.5" id="SWT-Yt-Wex"/>
+                            <constraint firstItem="sEO-56-l5w" firstAttribute="leading" secondItem="wfL-x8-tHb" secondAttribute="leading" constant="41" id="a9N-r0-ASV"/>
                             <constraint firstItem="nlC-qX-1VI" firstAttribute="trailing" secondItem="EvP-OZ-vhr" secondAttribute="trailing" id="iKE-vJ-SFZ"/>
                             <constraint firstItem="EvP-OZ-vhr" firstAttribute="centerX" secondItem="wfL-x8-tHb" secondAttribute="centerX" id="iOW-lh-ORY"/>
+                            <constraint firstItem="cCi-MV-AcE" firstAttribute="top" secondItem="sEO-56-l5w" secondAttribute="bottom" constant="16" id="jAH-tu-yfp"/>
                             <constraint firstItem="EvP-OZ-vhr" firstAttribute="centerY" secondItem="wfL-x8-tHb" secondAttribute="centerY" id="qHi-6z-9JD"/>
                             <constraint firstItem="nlC-qX-1VI" firstAttribute="top" secondItem="EvP-OZ-vhr" secondAttribute="bottom" constant="20" id="z3G-VV-eZF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wfL-x8-tHb"/>
                     </view>
                     <connections>
+                        <outlet property="photoContainerView" destination="sEO-56-l5w" id="8ey-Fy-8kT"/>
                         <outlet property="usernameTextField" destination="5qO-a5-mqy" id="TEe-Nt-kAx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mgC-Ii-m0f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="267" y="-2"/>
+        </scene>
+        <!--PhotoPicker-->
+        <scene sceneID="175-p3-ZIY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PhotoPicker" id="Jey-qy-KpD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rHr-iW-a8Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="963" y="0.0"/>
         </scene>
     </scenes>
 </document>

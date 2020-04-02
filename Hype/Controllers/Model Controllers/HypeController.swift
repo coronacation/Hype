@@ -7,6 +7,7 @@
 //
 
 import CloudKit
+import UIKit.UIImage
 
 class HypeController {
     
@@ -19,12 +20,12 @@ class HypeController {
     
     // MARK: - CRUD
     
-    func saveHype(body: String, completion: @escaping (Result<Hype?, HypeError>) -> Void) {
+    func saveHype(body: String, photo: UIImage?, completion: @escaping (Result<Hype?, HypeError>) -> Void) {
         guard let currentUser = UserController.shared.currentUser else { return completion(.failure(.noUserLoggedIn)) }
         
         let reference = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
         
-        let hype = Hype(body: body, userReference: reference)
+        let hype = Hype(body: body, userReference: reference, hypePhoto: photo)
         
         let record = CKRecord(hype: hype)
         
