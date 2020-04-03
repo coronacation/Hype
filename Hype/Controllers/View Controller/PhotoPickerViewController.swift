@@ -43,7 +43,7 @@ class PhotoPickerViewController: UIViewController {
         }
         
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-            self.openGallery()
+            self.openCamera()
         }
         
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
@@ -90,7 +90,7 @@ extension PhotoPickerViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
             guard let delegate = delegate else { return }
-            delegate.photoPickerSelected(image: pickedImage)
+            delegate.photoPickerSelected(image: pickedImage) 
             photoImageView.image = pickedImage
         }
         picker.dismiss(animated: true, completion: nil)
