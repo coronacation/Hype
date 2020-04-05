@@ -82,12 +82,9 @@ class HypesViewController: UIViewController {
             
             if let hype = hype {
                 hype.body = body
-                HypeController.shared.update(hype) { (result) in
-                    switch result {
-                    case .success(_):
+                HypeController.shared.update(hype) { (success) in
+                    if success {
                         self.updateViews()
-                    case .failure(let error):
-                        print(error)
                     }
                     
                     
@@ -100,7 +97,7 @@ class HypesViewController: UIViewController {
                     switch result{
                     case .success(_):
                         DispatchQueue.main.async {
-                                self.updateViews()
+                            self.updateViews()
                         }
                     case .failure(let error):
                         print(error.localizedDescription)
@@ -147,21 +144,16 @@ extension HypesViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let hype = HypeController.shared.hypes[indexPath.row]
             guard let index = HypeController.shared.hypes.firstIndex(of: hype) else { return }
-            HypeController.shared.delete(hype) { (result) in
-                switch result {
-                case .success(let success):
-                    if success {
-                        HypeController.shared.hypes.remove(at: index)
-                        DispatchQueue.main.async {
-                            tableView.deleteRows(at: [indexPath], with: .automatic)
-                        }
+            HypeController.shared.delete(hype) { (success) in
+                if success {
+                    HypeController.shared.hypes.remove(at: index)
+                    DispatchQueue.main.async {
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
-                case .failure(let error):
-                    print(error)
                 }
             }
         }
-    }
+    } // end editingStyle
     
     
 } // end extension
@@ -173,6 +165,7 @@ extension HypesViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
     }
     
 } // end extension

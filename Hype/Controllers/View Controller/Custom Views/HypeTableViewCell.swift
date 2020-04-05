@@ -68,7 +68,7 @@ class HypeTableViewCell: UITableViewCell {
     }
     
     func setPostImage(for hype: Hype) {
-        if let postImage = hype.hypePhoto {
+        if let postImage = hype.photo {
             hypeImageView.image = postImage
             hypeImageView.isHidden = false
         } else {

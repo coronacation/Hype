@@ -15,105 +15,70 @@ class HypeController {
     
     static let shared = HypeController()
     var hypes: [Hype] = []
-    let publicDB = CKContainer.default().publicCloudDatabase
+    
+    let ckManager = CKController()
     
     
     // MARK: - CRUD
     
     func saveHype(body: String, photo: UIImage?, completion: @escaping (Result<Hype?, HypeError>) -> Void) {
-        guard let currentUser = UserController.shared.currentUser else { return completion(.failure(.noUserLoggedIn)) }
+        guard let currentUser = UserController.shared.currentUser
+            else { return completion(.failure(.noUserLoggedIn)) }
         
         let reference = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
         
-        let hype = Hype(body: body, userReference: reference, hypePhoto: photo)
+        let newHype = Hype(body: body, userReference: reference, photo: photo)
         
-        let record = CKRecord(hype: hype)
-        
-        publicDB.save(record) { (record, error) in
-            if let error = error {
-                return completion(.failure(.ckError(error)))
-            }
-            
-            guard let record = record,
-                let hype = Hype(ckRecord: record) else
-            { return completion(.failure(.couldNotUnwrap)) }
-            
-            //            self.hypes.append(hype) // Alternative
-            self.hypes.insert(hype, at: 0)
-            return completion(.success(hype))
+        ckManager.save(object: newHype) { (result) in
+            switch result {
+            case .success(let savedHype):
+                self.hypes.append(savedHype)
+                completion(.success(savedHype))
+            case .failure(let error):
+                completion(.failure(.ckError(error)))
+        }
         }
     } // end saveHype
     
     func fetchAllHypes(completion: @escaping (Bool) -> Void) {
         
         
-        let predicate = NSPredicate(value: true) // return all records
+        let truePredicate = NSPredicate(value: true) // return all records
+        let compoundPred = NSCompoundPredicate(andPredicateWithSubpredicates: [truePredicate])
         
-        let query = CKQuery(recordType: HypeStrings.recordTypeKey, predicate: predicate)
-        
-        publicDB.perform(query, inZoneWith: nil) { (records, error) in
-            
-            // error handling
-            if let error = error {
-                print(error, error.localizedDescription)
-                return completion(false)
+        ckManager.fetch(predicate: compoundPred) { (result: Result<[Hype], CKError>) in
+            switch result {
+            case .success(let foundHypes):
+                self.hypes = foundHypes
+                completion(true)
+            case .failure:
+                completion(false)
             }
-            
-            guard let records = records else { return completion(false) }
-            
-            let hypes: [Hype] = records.compactMap(Hype.init(ckRecord: )) // you're passing a closure
-//            let hypes: [Hype] = records.compactMap { Hype(ckRecord: $0) } // alternative: in-line closure. you're writing your own instructions.
-            
-            self.hypes = hypes
-            return completion(true)
         }
+        
     } // end fetchAllHypes
     
     
-    func update(_ hype: Hype, completion: @escaping (Result<Hype?, HypeError>) -> Void) {
-        let record = CKRecord(hype: hype)
-        
-        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
-        operation.savePolicy = .changedKeys
-        operation.qualityOfService = .userInteractive
-        
-        operation.modifyRecordsCompletionBlock = { (records, _, error) in
-            if let error = error {
-                print(error.localizedDescription + " --> \(error)")
-                completion(.failure(.ckError(error)))
-                return
+    func update(_ hype: Hype, completion: @escaping (_ success: Bool) -> Void) {
+        ckManager.update(object: hype) { (result) in
+            switch result {
+            case .success:
+                completion(true)
+            case .failure:
+                completion(false)
             }
-            
-            guard let record = records?.first,
-            let updatedHype = Hype(ckRecord: record)
-                else { completion(.failure(.couldNotUnwrap)); return }
-            
-            completion(.success(updatedHype))
         }
-        
-        publicDB.add(operation)
     }
     
-    func delete(_ hype: Hype, completion: @escaping (Result<Bool, HypeError>) -> Void) {
-        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [hype.recordID])
-        
-        operation.savePolicy = .changedKeys
-        operation.qualityOfService = .userInteractive
-        operation.modifyRecordsCompletionBlock = { (records, _, error) in
-            if let error = error {
-                print(error.localizedDescription + " --> \(error)")
-                completion(.failure(.ckError(error)))
-                return
+    func delete(_ hype: Hype, completion: @escaping (_ success: Bool) -> Void) {
+        ckManager.delete(object: hype) { (result) in
+            switch result {
+            case .success:
+                completion(true)
+            case .failure:
+                completion(false)
             }
-            
-            if records?.count == 0{
-                completion(.success(true))
-            } else {
-                completion(.failure(.unexpectedRecordFound))
-            }
-        } // end modifyRecordsCompletionBlock
-        
-        publicDB.add(operation)
+        }
     } // end delete
     
     func subscribeForRemoteNotifications(completion: @escaping (Error?) -> Void) {
@@ -128,7 +93,7 @@ class HypeController {
         
         subscription.notificationInfo = notificationInfo
         
-        publicDB.save(subscription) { (_, error) in
+        ckManager.publicDB.save(subscription) { (_, error) in
             if let error = error {
                 print(error.localizedDescription + " --> \(error)")
                 completion(error)
