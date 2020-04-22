@@ -16,7 +16,7 @@ class HypeController {
     static let shared = HypeController()
     var hypes: [Hype] = []
     
-    let ckManager = CKController()
+//    let ckManager = CKController()
     
     
     // MARK: - CRUD

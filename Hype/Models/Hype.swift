@@ -22,7 +22,7 @@ struct HypeStrings {
 
 // MARK: - Model
 
-class Hype : CKSyncable, CKPhotoAssetAttachable {
+class Hype {
     var body: String
     var timestamp: Date
     var recordID: CKRecord.ID
@@ -30,33 +30,29 @@ class Hype : CKSyncable, CKPhotoAssetAttachable {
     var user: User?
     var photoData: Data?
     
-    var photo: UIImage?
-    
-    
-    
-    // CKSyncable
-    
-    static var recordType: CKRecord.RecordType {
-        HypeStrings.recordTypeKey
+    var hypePhoto: UIImage? {
+        get {
+            guard let photoData = photoData else { return nil }
+            return UIImage(data: photoData)
+        }
+        set {
+            photoData = newValue?.jpegData(compressionQuality: 0.5)
+        }
     }
     
-    var ckRecord: CKRecord {
-        let record = CKRecord(recordType: Hype.recordType, recordID: self.recordID)
-        
-        record.setValuesForKeys([
-            HypeStrings.bodyKey : self.body,
-            HypeStrings.timestampKey : self.timestamp
-        ])
-        
-        if let asset = photoAsset {
-            record.setValue(asset, forKey: HypeStrings.photoAssetKey)
+    var photoAsset: CKAsset? {
+        get {
+            guard let photoData = photoData else { return nil }
+            let tempDirectory = NSTemporaryDirectory()
+            let tempDirectoryURL = URL(fileURLWithPath: tempDirectory)
+            let fileURL = tempDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+            do {
+                try photoData.write(to: fileURL)
+            } catch {
+                print(error)
+            }
+            return CKAsset(fileURL: fileURL)
         }
-        
-        if let reference = userReference {
-            record.setValue(reference, forKey: HypeStrings.userReferenceKey)
-        }
-        
-        return record
     }
     
     /**
@@ -68,17 +64,19 @@ class Hype : CKSyncable, CKPhotoAssetAttachable {
      */
     
     
-    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userReference: CKRecord.Reference?, photo: UIImage? = nil) {
+    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userReference: CKRecord.Reference?, hypePhoto: UIImage? = nil) {
         self.body = body
         self.timestamp = timestamp
         self.recordID = recordID
         self.userReference = userReference
         
-        self.photo = photo // computed property. must be last.
+        self.hypePhoto = hypePhoto // computed property. must be last.
     }
-    
-    
-    // Incoming <---- (CKRecord into Hype)
+}
+
+// Incoming <---- (CKRecord into Hype)
+
+extension Hype {
     
     /**
      Convenience Failable Initializer to initialize Hypes stored in CloudKit
@@ -87,22 +85,27 @@ class Hype : CKSyncable, CKPhotoAssetAttachable {
         - ckRecord: the CKRecord object to turn into a Hype object
      */
     
-    required convenience init?(record: CKRecord) {
+    convenience init?(ckRecord: CKRecord) {
         
         // get properties
-        guard let body = record[HypeStrings.bodyKey] as? String,
-            let timestamp = record[HypeStrings.timestampKey] as? Date
+        guard let body = ckRecord[HypeStrings.bodyKey] as? String,
+            let timestamp = ckRecord[HypeStrings.timestampKey] as? Date
             else { return nil }
         
-        let userReference = record[HypeStrings.userReferenceKey] as? CKRecord.Reference
+        let userReference = ckRecord[HypeStrings.userReferenceKey] as? CKRecord.Reference
         
         var foundPhoto: UIImage?
-        if let photoAsset = record[HypeStrings.photoAssetKey] as? CKAsset {
-            foundPhoto = photoAsset.getImageForAsset()
+        if let photoAsset = ckRecord[HypeStrings.photoAssetKey] as? CKAsset {
+            do {
+                let data = try Data(contentsOf: photoAsset.fileURL!)
+                foundPhoto = UIImage(data: data)
+            } catch {
+                print(error)
+            }
         }
         
         // init
-        self.init(body: body, timestamp: timestamp, recordID: record.recordID, userReference: userReference, photo: foundPhoto)
+        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID, userReference: userReference, hypePhoto: foundPhoto)
     }
 }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Theo Vora. All rights reserved.
 //
 
-import CloudKit
+import Foundation
 import UIKit.UIImage
 
 struct UserConstants {
@@ -20,8 +20,6 @@ struct UserConstants {
 class User {
     var username: String
     var bio: String
-    var recordID: CKRecord.ID
-    var appleUserRef: CKRecord.Reference
     
     var photoData: Data?
     
@@ -32,20 +30,6 @@ class User {
         }
         set {
             photoData = newValue?.jpegData(compressionQuality: 0.5)
-        }
-    }
-    
-    var photoAsset: CKAsset? {
-        get {
-            let tempDirectory = NSTemporaryDirectory()
-            let tempDirectoryURL = URL(fileURLWithPath: tempDirectory)
-            let fileURL = tempDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension(".jpg")
-            do {
-                try photoData?.write(to: fileURL)
-            } catch {
-                print(error)
-            }
-            return CKAsset(fileURL: fileURL)
         }
     }
     
@@ -60,12 +44,10 @@ class User {
         - profilePhoto: UIImage of the user's profile
      */
     
-    init(username: String, bio: String = "", recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference, profilePhoto: UIImage? = nil) {
+    init(username: String, bio: String = "", profilePhoto: UIImage? = nil) {
         
         self.username = username
         self.bio = bio
-        self.recordID = recordID
-        self.appleUserRef = appleUserRef
         self.profilePhoto = profilePhoto
     }
 }
@@ -80,56 +62,57 @@ extension User {
      */
     
     
-    convenience init?(ckRecord: CKRecord) {
-        guard let username = ckRecord[UserConstants.usernameKey] as? String,
-            let bio = ckRecord[UserConstants.bioKey] as? String,
-            let appleUserRef = ckRecord[UserConstants.appleUserRefKey] as? CKRecord.Reference
-        else { return nil }
-        
-        var foundPhoto: UIImage?
-        if let photoAsset = ckRecord[UserConstants.photoAssetKey] as? CKAsset {
-            do {
-                let data = try Data(contentsOf: photoAsset.fileURL!)
-                foundPhoto = UIImage(data: data)
-            } catch {
-                print(error)
-            }
-        }
-        
-        self.init(username: username, bio: bio, recordID: ckRecord.recordID, appleUserRef: appleUserRef, profilePhoto: foundPhoto)
-    }
+//    convenience init?(ckRecord: CKRecord) {
+//        guard let username = ckRecord[UserConstants.usernameKey] as? String,
+//            let bio = ckRecord[UserConstants.bioKey] as? String,
+//            let appleUserRef = ckRecord[UserConstants.appleUserRefKey] as? CKRecord.Reference
+//        else { return nil }
+//
+//        var foundPhoto: UIImage?
+//        if let photoAsset = ckRecord[UserConstants.photoAssetKey] as? CKAsset {
+//            do {
+//                let data = try Data(contentsOf: photoAsset.fileURL!)
+//                foundPhoto = UIImage(data: data)
+//            } catch {
+//                print(error)
+//            }
+//        }
+//
+//        self.init(username: username, bio: bio, recordID: ckRecord.recordID, appleUserRef: appleUserRef, profilePhoto: foundPhoto)
+//    }
 }
 
-extension CKRecord {
-    
-    /**
-     Convenience init to create a CKRecord from a Hype Object
-     
-     - Parameters:
-        - user: The User object to set Key/Value pairs for inside the CKRecord object
-     */
-    
-    
-    convenience init(user: User) {
-        
-        self.init(recordType: UserConstants.recordType, recordID: user.recordID)
-        
-        setValuesForKeys([
-            UserConstants.usernameKey: user.username,
-            UserConstants.bioKey: user.bio,
-            UserConstants.appleUserRefKey : user.appleUserRef
-        ])
-        
-        // CKAsset photo is optional. Must unwrap. Cannot simply assign.
-        
-        if let photoAsset = user.photoAsset {
-            self.setValue(photoAsset, forKey: UserConstants.photoAssetKey)
-        }
-    }
-}
+//extension CKRecord {
+//
+//    /**
+//     Convenience init to create a CKRecord from a Hype Object
+//
+//     - Parameters:
+//        - user: The User object to set Key/Value pairs for inside the CKRecord object
+//     */
+//
+//
+//    convenience init(user: User) {
+//
+//        self.init(recordType: UserConstants.recordType, recordID: user.recordID)
+//
+//        setValuesForKeys([
+//            UserConstants.usernameKey: user.username,
+//            UserConstants.bioKey: user.bio,
+//            UserConstants.appleUserRefKey : user.appleUserRef
+//        ])
+//
+//        // CKAsset photo is optional. Must unwrap. Cannot simply assign.
+//
+//        if let photoAsset = user.photoAsset {
+//            self.setValue(photoAsset, forKey: UserConstants.photoAssetKey)
+//        }
+//    }
+//}
 
 extension User: Equatable {
     static func == (lhs: User, rhs: User) -> Bool {
-        lhs.recordID == rhs.recordID
+        // TO-DO: redefine this
+//        lhs.recordID == rhs.recordID
     }
 }

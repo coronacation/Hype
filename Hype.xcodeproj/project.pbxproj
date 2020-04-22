@@ -30,8 +30,6 @@
 		AC8B42CA243254CC0075B154 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8B42C9243254CC0075B154 /* CloudKit.framework */; };
 		AC8B42CE243257D20075B154 /* Hype.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B42CD243257D20075B154 /* Hype.swift */; };
 		AC8B42D124325ED80075B154 /* HypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B42D024325ED80075B154 /* HypeController.swift */; };
-		ACF3AAC72437DD4400959A71 /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF3AAC62437DD4400959A71 /* CloudKitController.swift */; };
-		ACF3AAC92437DDD700959A71 /* CloudKitProtocols+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF3AAC82437DDD700959A71 /* CloudKitProtocols+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,8 +59,6 @@
 		AC8B42C9243254CC0075B154 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		AC8B42CD243257D20075B154 /* Hype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hype.swift; sourceTree = "<group>"; };
 		AC8B42D024325ED80075B154 /* HypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeController.swift; sourceTree = "<group>"; };
-		ACF3AAC62437DD4400959A71 /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
-		ACF3AAC82437DDD700959A71 /* CloudKitProtocols+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitProtocols+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +116,6 @@
 			children = (
 				AC570BC52433AD0E00F8120A /* HypeError.swift */,
 				AC87C8042434FE3E005EE8B7 /* UserError.swift */,
-				ACF3AAC62437DD4400959A71 /* CloudKitController.swift */,
-				ACF3AAC82437DDD700959A71 /* CloudKitProtocols+Extensions.swift */,
 				AC614803243BA5C4003223BA /* StyleGuide.swift */,
 			);
 			path = "Helpers + Extensions";
@@ -288,13 +282,11 @@
 				AC18BEA124327031009D0E6A /* DateExtension.swift in Sources */,
 				AC87C8052434FE3E005EE8B7 /* UserError.swift in Sources */,
 				AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */,
-				ACF3AAC72437DD4400959A71 /* CloudKitController.swift in Sources */,
 				AC614804243BA5C4003223BA /* StyleGuide.swift in Sources */,
 				AC15AD89243682AD00FBF06F /* PhotoPickerViewController.swift in Sources */,
 				AC8B42D124325ED80075B154 /* HypeController.swift in Sources */,
 				AC570BE62434F4CC00F8120A /* User.swift in Sources */,
 				AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */,
-				ACF3AAC92437DDD700959A71 /* CloudKitProtocols+Extensions.swift in Sources */,
 				AC614802243BA36E003223BA /* LoginViewController.swift in Sources */,
 				AC8B42B6243254A30075B154 /* SceneDelegate.swift in Sources */,
 				AC8B42CE243257D20075B154 /* Hype.swift in Sources */,
