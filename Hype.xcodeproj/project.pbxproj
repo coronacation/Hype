@@ -17,6 +17,9 @@
 		AC31B8A02435194700AFF50A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31B89F2435194700AFF50A /* SignUpViewController.swift */; };
 		AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC570BC52433AD0E00F8120A /* HypeError.swift */; };
 		AC570BE62434F4CC00F8120A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC570BE52434F4CC00F8120A /* User.swift */; };
+		AC614800243B966E003223BA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC6147FF243B966E003223BA /* Colors.xcassets */; };
+		AC614802243BA36E003223BA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC614801243BA36E003223BA /* LoginViewController.swift */; };
+		AC614804243BA5C4003223BA /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC614803243BA5C4003223BA /* StyleGuide.swift */; };
 		AC87C8032434FE0F005EE8B7 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87C8022434FE0F005EE8B7 /* UserController.swift */; };
 		AC87C8052434FE3E005EE8B7 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC87C8042434FE3E005EE8B7 /* UserError.swift */; };
 		AC8B42B4243254A30075B154 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B42B3243254A30075B154 /* AppDelegate.swift */; };
@@ -42,6 +45,9 @@
 		AC31B89F2435194700AFF50A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC570BC52433AD0E00F8120A /* HypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeError.swift; sourceTree = "<group>"; };
 		AC570BE52434F4CC00F8120A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AC6147FF243B966E003223BA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		AC614801243BA36E003223BA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AC614803243BA5C4003223BA /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		AC87C8022434FE0F005EE8B7 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		AC87C8042434FE3E005EE8B7 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		AC8B42B0243254A30075B154 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +102,7 @@
 				AC31B89F2435194700AFF50A /* SignUpViewController.swift */,
 				AC15AD862436808500FBF06F /* CreatePostViewController.swift */,
 				AC15AD88243682AD00FBF06F /* PhotoPickerViewController.swift */,
+				AC614801243BA36E003223BA /* LoginViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -115,6 +122,7 @@
 				AC87C8042434FE3E005EE8B7 /* UserError.swift */,
 				ACF3AAC62437DD4400959A71 /* CloudKitController.swift */,
 				ACF3AAC82437DDD700959A71 /* CloudKitProtocols+Extensions.swift */,
+				AC614803243BA5C4003223BA /* StyleGuide.swift */,
 			);
 			path = "Helpers + Extensions";
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 				AC8B42BC243254A50075B154 /* Assets.xcassets */,
 				AC8B42BE243254A50075B154 /* LaunchScreen.storyboard */,
 				AC8B42C1243254A50075B154 /* Info.plist */,
+				AC6147FF243B966E003223BA /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -259,6 +268,7 @@
 				AC31B89E2435184300AFF50A /* HypeList.storyboard in Resources */,
 				AC15AD8C2436902300FBF06F /* PhotoPicker.storyboard in Resources */,
 				AC8B42C0243254A50075B154 /* LaunchScreen.storyboard in Resources */,
+				AC614800243B966E003223BA /* Colors.xcassets in Resources */,
 				AC8B42BD243254A50075B154 /* Assets.xcassets in Resources */,
 				AC8B42BB243254A30075B154 /* Main.storyboard in Resources */,
 			);
@@ -279,11 +289,13 @@
 				AC87C8052434FE3E005EE8B7 /* UserError.swift in Sources */,
 				AC18BE9F24326CCE009D0E6A /* HypesViewController.swift in Sources */,
 				ACF3AAC72437DD4400959A71 /* CloudKitController.swift in Sources */,
+				AC614804243BA5C4003223BA /* StyleGuide.swift in Sources */,
 				AC15AD89243682AD00FBF06F /* PhotoPickerViewController.swift in Sources */,
 				AC8B42D124325ED80075B154 /* HypeController.swift in Sources */,
 				AC570BE62434F4CC00F8120A /* User.swift in Sources */,
 				AC570BC62433AD0E00F8120A /* HypeError.swift in Sources */,
 				ACF3AAC92437DDD700959A71 /* CloudKitProtocols+Extensions.swift in Sources */,
+				AC614802243BA36E003223BA /* LoginViewController.swift in Sources */,
 				AC8B42B6243254A30075B154 /* SceneDelegate.swift in Sources */,
 				AC8B42CE243257D20075B154 /* Hype.swift in Sources */,
 				AC15AD8524365E0F00FBF06F /* HypeTableViewCell.swift in Sources */,
